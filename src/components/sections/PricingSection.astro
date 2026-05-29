@@ -1,4 +1,6 @@
 ---
+import { LuCheck, LuMinus, LuSparkles } from 'react-icons/lu';
+
 const planUrl = (plan: string) =>
   `https://wa.me/528123540887?text=${encodeURIComponent(`Hola, me interesa cotizar el plan ${plan} de AquaSense`)}`;
 
@@ -102,9 +104,6 @@ const groups = [
   },
 ];
 
-const checkIcon = `<path d="M20 6 9 17l-5-5"/>`;
-const dashIcon = `<path d="M5 12h14"/>`;
-const sparkleIcon = `<path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-4.12-1.06a.5.5 0 0 1 0-.97L8.5 10.96a2 2 0 0 0 1.44-1.44L11 5.4a.5.5 0 0 1 .97 0l1.06 4.12a2 2 0 0 0 1.44 1.44l4.12 1.07a.5.5 0 0 1 0 .97l-4.12 1.06a2 2 0 0 0-1.44 1.44l-1.06 4.12a.5.5 0 0 1-.97 0Z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>`;
 ---
 
 <section id="planes" class="bg-canvas py-14 md:py-[4.5rem]">
@@ -127,19 +126,7 @@ const sparkleIcon = `<path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-4.12-1.06a.5.5 0 0
               <div class="relative">
                 {plan.recommended && (
                   <span class="absolute left-1/2 top-0 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 rounded-full border border-primary/40 bg-primary px-3 py-1 text-[0.62rem] font-medium uppercase tracking-[0.2em] text-white shadow-[0_16px_34px_-22px_rgba(47,111,229,0.95)]">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="13"
-                      height="13"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                      set:html={sparkleIcon}
-                    />
+                    <LuSparkles size={13} strokeWidth={2.2} aria-hidden="true" />
                     Recomendado
                   </span>
                 )}
@@ -201,19 +188,11 @@ const sparkleIcon = `<path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-4.12-1.06a.5.5 0 0
                             }`}
                             aria-label={included ? 'Incluido' : 'No incluido'}
                           >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width={included ? '17' : '15'}
-                              height={included ? '17' : '15'}
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width={included ? '2.5' : '2'}
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              aria-hidden="true"
-                              set:html={included ? checkIcon : dashIcon}
-                            />
+                            {included ? (
+                              <LuCheck size={17} strokeWidth={2.5} aria-hidden="true" />
+                            ) : (
+                              <LuMinus size={15} strokeWidth={2} aria-hidden="true" />
+                            )}
                           </span>
                         </div>
                       );

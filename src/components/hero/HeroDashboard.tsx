@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useReducedMotion } from 'framer-motion';
-import { TriangleAlert } from 'lucide-react';
+import { LuTriangleAlert } from 'react-icons/lu';
 import {
   LineChart,
   Line,
@@ -48,7 +48,7 @@ function AlertBadge() {
       className="mt-3 flex items-center gap-2 rounded-xl px-4 py-2.5"
       style={{ background: '#78350F', border: '1px solid #92400E' }}
     >
-      <TriangleAlert className="h-4 w-4 shrink-0 text-yellow-400" strokeWidth={1.8} />
+      <LuTriangleAlert className="h-4 w-4 shrink-0 text-yellow-400" strokeWidth={1.8} />
       <span className="text-xs font-medium" style={{ color: '#FDE68A' }}>
         Filtro #3 — Presión diferencial elevada · hace 4 min
       </span>

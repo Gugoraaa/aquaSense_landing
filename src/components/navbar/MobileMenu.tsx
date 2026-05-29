@@ -2,17 +2,17 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BriefcaseBusiness, CircleDollarSign, Cpu, Droplets, Home, UsersRound, X } from 'lucide-react';
+import { LuBriefcaseBusiness, LuCircleDollarSign, LuCpu, LuDroplets, LuHouse, LuUsersRound, LuX } from 'react-icons/lu';
 
 const waUrl = 'https://wa.me/528123540887?text=Hola%2C%20me%20interesa%20solicitar%20una%20demo%20de%20AquaSense';
 
 const navLinks = [
-  { label: 'Inicio', href: '#inicio', Icon: Home },
-  { label: 'Servicios', href: '#servicios', Icon: BriefcaseBusiness },
-  { label: 'Proceso', href: '#como-funciona', Icon: Droplets },
-  { label: 'Tecnología', href: '#funcionalidades', Icon: Cpu },
-  { label: 'Clientes', href: '#clientes', Icon: UsersRound },
-  { label: 'Planes', href: '#planes', Icon: CircleDollarSign },
+  { label: 'Inicio', href: '#inicio', Icon: LuHouse },
+  { label: 'Servicios', href: '#servicios', Icon: LuBriefcaseBusiness },
+  { label: 'Proceso', href: '#como-funciona', Icon: LuDroplets },
+  { label: 'Tecnología', href: '#funcionalidades', Icon: LuCpu },
+  { label: 'Clientes', href: '#clientes', Icon: LuUsersRound },
+  { label: 'Planes', href: '#planes', Icon: LuCircleDollarSign },
 ];
 
 export default function MobileMenu() {
@@ -73,7 +73,7 @@ export default function MobileMenu() {
                   transition={{ duration: 0.2 }}
                   className="inline-flex"
                 >
-                  <X className="h-5 w-5" strokeWidth={2.2} aria-hidden="true" />
+                  <LuX className="h-5 w-5" strokeWidth={2.2} aria-hidden="true" />
                 </motion.span>
               </button>
             </div>

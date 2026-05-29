@@ -1,5 +1,6 @@
 ---
 import SectionHeader from '../shared/SectionHeader.astro';
+import { LuCheck } from 'react-icons/lu';
 
 const checkItems = [
   'Reportes diarios, semanales y mensuales',
@@ -18,7 +19,6 @@ const reportRows = [
   { label: 'Consumo químico', value: '↓ 18%' },
 ];
 
-const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
 ---
 
 <section class="bg-canvas py-24">
@@ -35,19 +35,7 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
           {checkItems.map((item) => (
             <li class="flex items-center gap-3">
               <span class="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="text-primary"
-                  set:html={checkIcon}
-                />
+                <LuCheck size={14} strokeWidth={3} className="text-primary" aria-hidden="true" />
               </span>
               <span class="text-body text-sm">{item}</span>
             </li>

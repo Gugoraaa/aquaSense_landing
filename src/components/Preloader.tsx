@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { Droplet as DropletIcon } from 'lucide-react';
+import { LuDroplet as DropletIcon } from 'react-icons/lu';
 import { useEffect, useState } from 'react';
 
 type Phase = 'drop' | 'reveal';
