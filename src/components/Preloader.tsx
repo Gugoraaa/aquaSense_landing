@@ -3,6 +3,8 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { LuDroplet as DropletIcon } from 'react-icons/lu';
 import { useEffect, useState } from 'react';
+import { useBodyScrollLock } from './useBodyScrollLock';
+import { markPreloaded } from './usePreloaded';
 
 type Phase = 'drop' | 'reveal';
 
@@ -17,25 +19,24 @@ export default function Preloader() {
   const [visible, setVisible] = useState(true);
   const [phase, setPhase] = useState<Phase>(reduceMotion ? 'reveal' : 'drop');
 
-  // Bloquea el scroll mientras la pantalla de carga está activa.
-  useEffect(() => {
-    const previous = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = previous;
-    };
-  }, []);
+  useBodyScrollLock(visible);
 
   // Línea de tiempo de la animación.
   useEffect(() => {
     if (reduceMotion) {
-      const done = window.setTimeout(() => setVisible(false), 1600);
+      const done = window.setTimeout(() => {
+        setVisible(false);
+        markPreloaded();
+      }, 1600);
       return () => window.clearTimeout(done);
     }
 
     const timers = [
       window.setTimeout(() => setPhase('reveal'), 1000),
-      window.setTimeout(() => setVisible(false), 2500),
+      window.setTimeout(() => {
+        setVisible(false);
+        markPreloaded();
+      }, 2500),
     ];
     return () => timers.forEach((t) => window.clearTimeout(t));
   }, [reduceMotion]);

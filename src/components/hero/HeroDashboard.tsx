@@ -14,6 +14,7 @@ import {
 } from 'recharts';
 import StatusChip from '../shared/StatusChip';
 import { heroSettleSeconds, heroSyncTransition } from './motionConfig';
+import { usePreloaded } from '../usePreloaded';
 
 const chartData = [
   { h: '00h', ph: 7.1, cl: 1.3 },
@@ -58,11 +59,12 @@ function AlertBadge() {
 
 export default function HeroDashboard() {
   const reduceMotion = useReducedMotion();
+  const preloaded = usePreloaded();
 
   return (
     <motion.div
       initial={reduceMotion ? false : { opacity: 0, y: 28, scale: 0.982 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
+      animate={preloaded ? { opacity: 1, y: 0, scale: 1 } : undefined}
       transition={heroSyncTransition(0.04)}
       className="w-full"
     >

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LuBriefcaseBusiness, LuCircleDollarSign, LuCpu, LuDroplets, LuHouse, LuUsersRound, LuX } from 'react-icons/lu';
+import { useBodyScrollLock } from '../useBodyScrollLock';
 
 const waUrl = 'https://wa.me/528123540887?text=Hola%2C%20me%20interesa%20solicitar%20una%20demo%20de%20AquaSense';
 
@@ -18,21 +19,14 @@ const navLinks = [
 export default function MobileMenu() {
   const [open, setOpen] = useState(false);
 
+  useBodyScrollLock(open);
+
   useEffect(() => {
     const btn = document.getElementById('hamburger-btn');
     const handleClick = () => setOpen((prev) => !prev);
     btn?.addEventListener('click', handleClick);
     return () => btn?.removeEventListener('click', handleClick);
   }, []);
-
-  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => { document.body.style.overflow = ''; };
-  }, [open]);
 
   return (
     <AnimatePresence>

@@ -3,6 +3,7 @@
 import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { statsSettleMilliseconds, statsSyncTransition } from './motionConfig';
+import { usePreloaded } from '../usePreloaded';
 
 type Stat =
   | {
@@ -88,6 +89,8 @@ function TextStatValue({ stat, active }: { stat: Extract<Stat, { kind: 'text' }>
 export default function HeroStats() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const preloaded = usePreloaded();
+  const active = preloaded && isInView;
 
   return (
     <div
@@ -99,14 +102,14 @@ export default function HeroStats() {
           key={stat.label}
           className={stat.kind === 'text' ? 'col-span-2 md:col-span-1' : undefined}
           initial={{ opacity: 0, y: 14 }}
-          animate={isInView ? { opacity: 1, y: 0 } : undefined}
+          animate={active ? { opacity: 1, y: 0 } : undefined}
           transition={statsSyncTransition(index * 0.08)}
         >
           <p className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-ink tabular-nums">
             {stat.kind === 'number' ? (
-              <NumberStatValue stat={stat} active={isInView} />
+              <NumberStatValue stat={stat} active={active} />
             ) : (
-              <TextStatValue stat={stat} active={isInView} />
+              <TextStatValue stat={stat} active={active} />
             )}
           </p>
           <p className="text-sm text-body mt-1">{stat.label}</p>

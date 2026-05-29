@@ -3,6 +3,7 @@
 import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useRef } from 'react';
 import { heroSyncTransition } from './motionConfig';
+import { usePreloaded } from '../usePreloaded';
 
 const waUrl = 'https://wa.me/528123540887?text=Hola%2C%20me%20interesa%20solicitar%20una%20demo%20de%20AquaSense';
 const headline = 'Tu planta de agua, monitoreada en tiempo real.';
@@ -11,8 +12,9 @@ export default function HeroIntro() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
   const reduceMotion = useReducedMotion();
+  const preloaded = usePreloaded();
   const revealInitial = reduceMotion ? false : { opacity: 0, y: 14 };
-  const revealAnimate = isInView ? { opacity: 1, y: 0 } : undefined;
+  const revealAnimate = preloaded && isInView ? { opacity: 1, y: 0 } : undefined;
 
   return (
     <div ref={ref}>

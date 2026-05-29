@@ -1,6 +1,5 @@
 ---
-import { LuCpu, LuRouter, LuMonitorSmartphone } from 'react-icons/lu';
-import { TiCloudStorageOutline } from 'react-icons/ti';
+import { LuCloud, LuCpu, LuRouter, LuMonitorSmartphone } from 'react-icons/lu';
 
 const steps = [
   {
@@ -22,7 +21,7 @@ const steps = [
     title: 'AquaSense Cloud',
     description: 'Procesamiento en tiempo real, históricos ilimitados y detección de anomalías con IA.',
     tags: ['IA', '99.9% uptime'],
-    Icon: TiCloudStorageOutline,
+    Icon: LuCloud,
   },
   {
     num: '04',
@@ -63,9 +62,9 @@ const steps = [
             <div class="process-card flex h-full min-h-[310px] flex-col rounded-lg border border-border bg-surface px-6 py-7 shadow-[0_22px_50px_-32px_rgba(0,0,0,0.8)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_58px_-32px_rgba(0,0,0,0.9)]">
               <div class="process-icon mb-7 flex h-11 w-11 items-center justify-center rounded-md border border-primary/20 bg-primary/[0.055] text-primary shadow-[inset_0_1px_0_rgba(255,255,255,0.07)]">
                 <Icon
-                  size={title === 'AquaSense Cloud' ? 32 : 24}
+                  size={24}
                   strokeWidth={1.75}
-                  className={title === 'AquaSense Cloud' ? 'block translate-y-px scale-[1.05] overflow-visible' : 'block overflow-visible'}
+                  className="block overflow-visible"
                   aria-hidden="true"
                 />
               </div>
