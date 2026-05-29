@@ -19,7 +19,7 @@ const waUrl = 'https://wa.me/528123540887?text=Hola%2C%20me%20interesa%20solicit
       aria-label="Navegación principal"
       class="nav-menu hidden items-center rounded-full border border-border/80 bg-surface/80 px-2 py-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] lg:flex"
     >
-      <a href="/" class="nav-link is-active" data-nav-item data-section="inicio" aria-label="Inicio" aria-current="page" title="Inicio">
+      <a href="#inicio" class="nav-link is-active" data-nav-item data-section="inicio" aria-label="Inicio" aria-current="page" title="Inicio">
         <Home className="h-[18px] w-[18px]" strokeWidth={2.25} aria-hidden="true" />
         <span class="nav-label">Inicio</span>
       </a>
@@ -35,13 +35,13 @@ const waUrl = 'https://wa.me/528123540887?text=Hola%2C%20me%20interesa%20solicit
         <Cpu className="h-[18px] w-[18px]" strokeWidth={2.25} aria-hidden="true" />
         <span class="nav-label">Tecnología</span>
       </a>
-      <a href="#planes" class="nav-link" data-nav-item data-section="planes" aria-label="Planes" title="Planes">
-        <CircleDollarSign className="h-[18px] w-[18px]" strokeWidth={2.25} aria-hidden="true" />
-        <span class="nav-label">Planes</span>
-      </a>
       <a href="#clientes" class="nav-link" data-nav-item data-section="clientes" aria-label="Clientes" title="Clientes">
         <UsersRound className="h-[18px] w-[18px]" strokeWidth={2.25} aria-hidden="true" />
         <span class="nav-label">Clientes</span>
+      </a>
+      <a href="#planes" class="nav-link" data-nav-item data-section="planes" aria-label="Planes" title="Planes">
+        <CircleDollarSign className="h-[18px] w-[18px]" strokeWidth={2.25} aria-hidden="true" />
+        <span class="nav-label">Planes</span>
       </a>
     </nav>
 
@@ -174,48 +174,61 @@ const waUrl = 'https://wa.me/528123540887?text=Hola%2C%20me%20interesa%20solicit
     return hash || 'inicio';
   };
 
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 10) {
-      nav?.classList.add('is-scrolled');
-    } else {
-      nav?.classList.remove('is-scrolled');
-    }
-
-    if (window.scrollY < 240) {
-      setActiveNavItem('inicio');
-    }
-  });
-
   navItems.forEach((item) => {
     item.addEventListener('click', () => {
       setActiveNavItem(item.getAttribute('data-section') || 'inicio');
     });
   });
 
-  window.addEventListener('hashchange', () => setActiveNavItem(getSectionFromHash()));
-
-  const sections = navItems
+  const sectionIds = new Set(navItems
     .map((item) => item.getAttribute('data-section'))
-    .filter((sectionId) => sectionId && sectionId !== 'inicio')
-    .map((sectionId) => document.getElementById(sectionId))
-    .filter(Boolean);
+    .filter((sectionId) => sectionId && sectionId !== 'inicio'));
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      const visibleEntry = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+  const sections = Array.from(document.querySelectorAll('main section[id]'))
+    .filter((section) => sectionIds.has(section.id));
 
-      if (visibleEntry?.target?.id) {
-        setActiveNavItem(visibleEntry.target.id);
-      }
-    },
-    {
-      rootMargin: '-22% 0px -58% 0px',
-      threshold: [0.18, 0.32, 0.5],
+  const getSectionFromScroll = () => {
+    if (window.scrollY < 240) {
+      return 'inicio';
     }
-  );
 
-  sections.forEach((section) => observer.observe(section));
+    const navBottom = nav?.getBoundingClientRect().bottom || 80;
+    const activationLine = navBottom + 32;
+    let activeSection = 'inicio';
+
+    for (const section of sections) {
+      const sectionTop = section.getBoundingClientRect().top;
+
+      if (sectionTop <= activationLine) {
+        activeSection = section.id;
+      } else {
+        break;
+      }
+    }
+
+    return activeSection;
+  };
+
+  let frameRequest = 0;
+
+  const updateNavState = () => {
+    nav?.classList.toggle('is-scrolled', window.scrollY > 10);
+    setActiveNavItem(getSectionFromScroll());
+    frameRequest = 0;
+  };
+
+  const requestNavUpdate = () => {
+    if (frameRequest) return;
+    frameRequest = window.requestAnimationFrame(updateNavState);
+  };
+
+  window.addEventListener('scroll', requestNavUpdate, { passive: true });
+  window.addEventListener('resize', requestNavUpdate);
+  window.addEventListener('hashchange', () => {
+    setActiveNavItem(getSectionFromHash());
+    requestNavUpdate();
+  });
+
+  updateNavState();
   setActiveNavItem(getSectionFromHash());
 </script>

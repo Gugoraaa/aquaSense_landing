@@ -27,4 +27,8 @@
 }
 
 html { scroll-behavior: smooth; }
+main[id],
+section[id] {
+  scroll-margin-top: 6.75rem;
+}
 body { font-family: var(--font-sans); background: #F7F8F4; color: #10201D; }
