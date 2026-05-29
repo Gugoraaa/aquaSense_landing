@@ -107,14 +107,14 @@ const dashIcon = `<path d="M5 12h14"/>`;
 const sparkleIcon = `<path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-4.12-1.06a.5.5 0 0 1 0-.97L8.5 10.96a2 2 0 0 0 1.44-1.44L11 5.4a.5.5 0 0 1 .97 0l1.06 4.12a2 2 0 0 0 1.44 1.44l4.12 1.07a.5.5 0 0 1 0 .97l-4.12 1.06a2 2 0 0 0-1.44 1.44l-1.06 4.12a.5.5 0 0 1-.97 0Z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>`;
 ---
 
-<section id="planes" class="bg-white py-14 md:py-[4.5rem]">
+<section id="planes" class="bg-canvas py-14 md:py-[4.5rem]">
   <div class="mx-auto max-w-[1200px] px-6">
     <div class="mx-auto mb-10 max-w-4xl text-center">
-      <p class="inline-flex rounded-full border border-border bg-surface-soft px-4 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-primary">
+      <p class="inline-flex rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-primary">
         Planes
       </p>
       <h2 class="mt-5 text-3xl font-bold leading-tight tracking-tight text-ink md:text-5xl">
-        Un plan para cada etapa
+        Elige el nivel de control que necesita tu operación
       </h2>
     </div>
 
@@ -126,7 +126,7 @@ const sparkleIcon = `<path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-4.12-1.06a.5.5 0 0
             {plans.map((plan) => (
               <div class="relative">
                 {plan.recommended && (
-                  <span class="absolute left-1/2 top-0 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 rounded-full border border-[#0f3d35]/20 bg-[#0f3d35] px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.18em] text-white shadow-[0_16px_34px_-22px_rgba(15,61,53,0.95)]">
+                  <span class="absolute left-1/2 top-0 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 rounded-full border border-primary/40 bg-primary px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.18em] text-white shadow-[0_16px_34px_-22px_rgba(47,111,229,0.95)]">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="13"
@@ -147,24 +147,24 @@ const sparkleIcon = `<path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-4.12-1.06a.5.5 0 0
             ))}
           </div>
 
-          <div class="overflow-hidden rounded-[1.75rem] border border-border bg-white shadow-[0_24px_70px_-50px_rgba(7,27,32,0.35)]">
+          <div class="overflow-hidden rounded-[1.75rem] border border-border bg-surface shadow-[0_26px_75px_-54px_rgba(0,0,0,0.85)]">
             <div class="grid grid-cols-[minmax(280px,1.22fr)_repeat(3,minmax(0,1fr))]">
-              <div class="flex min-h-[150px] items-end border-b border-border bg-surface-soft/50 px-6 py-5">
+              <div class="flex min-h-[150px] items-end border-b border-border bg-surface-soft px-6 py-5">
                 <span class="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-primary">PLAN</span>
               </div>
 
               {plans.map((plan) => (
-                <div class={`min-h-[150px] border-b border-l border-border px-6 py-6 ${plan.recommended ? 'bg-surface-soft' : 'bg-white'}`}>
+                <div class={`min-h-[150px] border-b border-l border-border px-6 py-6 ${plan.recommended ? 'bg-primary/10' : 'bg-surface'}`}>
                   <h3 class="text-xl font-bold leading-tight tracking-tight text-ink">{plan.name}</h3>
-                  <p class="mt-1 text-xs font-semibold text-primary">{plan.subtitle}</p>
+                  <p class="mt-1 text-xs font-semibold text-muted">{plan.subtitle}</p>
                   <a
                     href={plan.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     class={`mt-7 inline-flex w-full items-center justify-center rounded-full px-5 py-2.5 text-xs font-bold transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 ${
                       plan.recommended
-                        ? 'bg-primary text-white hover:bg-primary-dark'
-                        : 'border border-border bg-white text-ink hover:bg-surface-soft'
+                        ? 'bg-primary text-white shadow-[0_12px_26px_-18px_rgba(47,111,229,0.9)] hover:bg-primary-dark'
+                        : 'border border-primary/40 bg-transparent text-primary hover:bg-primary/10'
                     }`}
                   >
                     {plan.cta}
@@ -175,38 +175,40 @@ const sparkleIcon = `<path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-4.12-1.06a.5.5 0 0
 
             {groups.map((group) => (
               <div>
-                <div class="flex items-center gap-4 border-b border-border bg-[#F5FAF8] px-6 py-3.5">
+                <div class="flex items-center gap-4 border-b border-border bg-surface px-6 py-3.5">
                   <span class="shrink-0 text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-primary">{group.label}</span>
                   <span class="h-px flex-1 bg-border" aria-hidden="true"></span>
                 </div>
 
                 {group.features.map((feature) => (
                   <div class="grid min-h-[64px] grid-cols-[minmax(280px,1.22fr)_repeat(3,minmax(0,1fr))] border-b border-border last:border-b-0">
-                    <div class="flex items-center bg-white px-6 py-4">
-                      <p class="text-sm font-semibold text-ink">{feature.label}</p>
+                    <div class="flex items-center bg-surface px-6 py-4">
+                      <p class="text-sm font-semibold text-body">{feature.label}</p>
                     </div>
 
                     {plans.map((plan) => {
                       const included = feature.plans.includes(plan.id);
 
                       return (
-                        <div class={`flex items-center justify-center border-l border-border ${plan.recommended ? 'bg-surface-soft/65' : 'bg-white'}`}>
+                        <div class={`flex items-center justify-center border-l border-border ${plan.recommended ? 'bg-primary/[0.07]' : 'bg-surface'}`}>
                           <span
-                            class={`inline-flex h-8 w-8 items-center justify-center rounded-full border ${
+                            class={`inline-flex h-9 w-9 items-center justify-center rounded-full border shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] ${
                               included
-                                ? 'border-primary/35 bg-primary/10 text-primary'
+                                ? plan.recommended
+                                  ? 'border-primary/60 bg-primary/25 text-primary'
+                                  : 'border-primary/40 bg-primary/15 text-primary'
                                 : 'border-border bg-surface-soft text-muted'
                             }`}
                             aria-label={included ? 'Incluido' : 'No incluido'}
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
+                              width={included ? '19' : '16'}
+                              height={included ? '19' : '16'}
                               viewBox="0 0 24 24"
                               fill="none"
                               stroke="currentColor"
-                              stroke-width="2.4"
+                              stroke-width={included ? '3.2' : '2.4'}
                               stroke-linecap="round"
                               stroke-linejoin="round"
                               aria-hidden="true"

@@ -56,7 +56,7 @@ export default function MobileMenu() {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', stiffness: 220, damping: 28 }}
-            className="fixed right-3 top-3 z-[70] flex h-[calc(100dvh-1.5rem)] w-[min(21rem,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-[1.75rem] border border-white/70 bg-surface/95 shadow-[0_24px_70px_-32px_rgba(7,27,32,0.7)] backdrop-blur-2xl"
+            className="fixed right-3 top-3 z-[70] flex h-[calc(100dvh-1.5rem)] w-[min(21rem,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-[1.75rem] border border-white/10 bg-surface/95 shadow-[0_24px_70px_-28px_rgba(0,0,0,0.9)] backdrop-blur-2xl"
           >
             <div className="flex h-16 items-center justify-between border-b border-border/80 px-6">
               <span className="text-lg font-bold tracking-tight text-ink">

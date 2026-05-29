@@ -21,7 +21,7 @@ const reportRows = [
 const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
 ---
 
-<section class="bg-surface py-24">
+<section class="bg-canvas py-24">
   <div class="max-w-[1200px] mx-auto px-6">
     <div class="grid md:grid-cols-2 gap-16 items-center">
       <!-- Left: content -->
@@ -63,7 +63,7 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
         </div>
 
         <!-- Body -->
-        <div class="bg-white p-6 flex flex-col gap-4">
+        <div class="bg-surface p-6 flex flex-col gap-4">
           {reportRows.map((row) => (
             <div class="flex items-center justify-between py-2 border-b border-border last:border-0">
               <span class="text-muted text-sm">{row.label}</span>
@@ -73,7 +73,7 @@ const checkIcon = `<polyline points="20 6 9 17 4 12"/>`;
         </div>
 
         <!-- Footer -->
-        <div class="bg-white px-6 pb-6 flex gap-3 flex-wrap">
+        <div class="bg-surface px-6 pb-6 flex gap-3 flex-wrap">
           <button class="inline-flex items-center justify-center px-4 py-2 border border-primary text-primary text-sm font-semibold rounded-xl hover:bg-primary/5 transition-colors duration-200">
             Descargar PDF
           </button>
