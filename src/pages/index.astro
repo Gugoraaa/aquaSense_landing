@@ -5,13 +5,12 @@ import MobileMenu from '../components/navbar/MobileMenu.tsx';
 import HeroSection from '../components/hero/HeroSection.astro';
 import ProblemSection from '../components/sections/ProblemSection.astro';
 import SolutionSection from '../components/sections/SolutionSection.astro';
-import HowItWorks from '../components/sections/HowItWorks.astro';
+import AquaSenseStackedProcess from '../components/sections/AquaSenseStackedProcess.tsx';
 import AutomationSection from '../components/sections/AutomationSection.astro';
 import UseCasesSection from '../components/sections/UseCasesSection.astro';
 import ReportsSection from '../components/sections/ReportsSection.astro';
 import TestimonialsSection from '../components/sections/TestimonialsSection.astro';
 import PricingSection from '../components/sections/PricingSection.astro';
-import CtaSection from '../components/sections/CtaSection.astro';
 import Footer from '../components/sections/Footer.astro';
 ---
 
@@ -22,13 +21,12 @@ import Footer from '../components/sections/Footer.astro';
     <HeroSection />
     <ProblemSection />
     <SolutionSection />
-    <HowItWorks />
+    <AquaSenseStackedProcess client:load />
     <AutomationSection />
     <UseCasesSection />
     <ReportsSection />
     <TestimonialsSection />
     <PricingSection />
-    <CtaSection />
   </main>
   <Footer />
 </Layout>

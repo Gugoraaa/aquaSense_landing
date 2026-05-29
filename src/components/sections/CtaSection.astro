@@ -1,58 +1,129 @@
 ---
+import {
+  LuArrowRight,
+  LuCircleCheck,
+  LuClock3,
+  LuMail,
+  LuMessageCircle,
+  LuPhone,
+  LuPlug,
+  LuShieldCheck,
+} from 'react-icons/lu';
+
 const waUrl = 'https://wa.me/528123540887?text=Hola%2C%20me%20interesa%20solicitar%20una%20demo%20de%20AquaSense';
+const email = 'pislaspro@gmail.com';
+
+const checkpoints = [
+  {
+    Icon: LuPlug,
+    title: 'Sin reemplazar equipos',
+    description: 'Integramos señales de sensores y PLCs que ya operan en planta.',
+  },
+  {
+    Icon: LuClock3,
+    title: 'Demo en 30 minutos',
+    description: 'Revisamos prioridades, alertas y reportes con tu equipo operativo.',
+  },
+];
+
+const steps = [
+  'Mapa de señales actuales',
+  'Alertas críticas por prioridad',
+  'Plan de arranque por etapas',
+];
 ---
 
-<section
-  id="contacto"
-  class="py-32 text-center"
-  style="background: radial-gradient(circle at 50% 50%, rgba(59,130,196,0.15), transparent 60%), #071B20;"
->
+<section id="contacto" class="bg-canvas py-20 md:py-24">
   <div class="max-w-[1200px] mx-auto px-6">
-    <h2 class="text-4xl md:text-5xl font-extrabold tracking-[-0.035em] text-white leading-[1.02] max-w-3xl mx-auto">
-      Lleva tu planta de agua a una operación inteligente.
-    </h2>
+    <div class="grid gap-10 border-y border-border py-12 md:grid-cols-[1.05fr_0.95fr] md:py-14">
+      <div class="flex flex-col justify-center">
+        <p class="mb-4 font-display text-xs font-semibold uppercase tracking-[0.28em] text-primary">
+          Contacto
+        </p>
 
-    <p class="mt-6 text-lg max-w-xl mx-auto leading-relaxed" style="color: rgba(247,250,250,0.7);">
-      Plataforma de monitoreo de calidad del agua en tiempo real para plantas industriales y de tratamiento. Conectamos con sensores y PLCs existentes sin reemplazar nada.
-    </p>
+        <h2 class="max-w-2xl font-display text-3xl font-extrabold leading-[1.05] tracking-[-0.035em] text-ink md:text-5xl">
+          Agenda una demo enfocada en tu planta.
+        </h2>
 
-    <!-- CTAs -->
-    <div class="flex gap-4 justify-center flex-wrap mt-8">
-      <a
-        href={waUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="font-display inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-bold tracking-tight rounded-xl hover:bg-primary-dark transition-colors duration-200"
-      >
-        Solicitar demo
-      </a>
-      <a
-        href={waUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="font-display inline-flex items-center justify-center px-6 py-3 font-bold tracking-tight rounded-xl transition-colors duration-200 text-white"
-        style="border: 1px solid rgba(255,255,255,0.3);"
-        onmouseover="this.style.background='rgba(255,255,255,0.1)'"
-        onmouseout="this.style.background='transparent'"
-      >
-        Contactar por WhatsApp
-      </a>
-    </div>
+        <p class="mt-5 max-w-xl text-base leading-relaxed text-body md:text-lg">
+          Revisamos sensores, PLCs y reportes actuales para mostrarte dónde AquaSense entra sin interrumpir tu operación.
+        </p>
 
-    <!-- Contact row -->
-    <div class="mt-10 flex gap-8 justify-center flex-wrap text-muted text-sm">
-      <a
-        href="tel:+528123540887"
-        class="hover:text-on-dark transition-colors"
-      >
-        📞 +52 81 2354 0887
-      </a>
-      <a
-        href="mailto:pislaspro@gmail.com"
-        class="hover:text-on-dark transition-colors"
-      >
-        ✉️ pislaspro@gmail.com
-      </a>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a
+            href={waUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-display inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-bold tracking-tight text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-dark active:translate-y-0 sm:w-auto"
+          >
+            Solicitar demo
+            <LuArrowRight size={17} className="[stroke-width:2.2]" aria-hidden="true" />
+          </a>
+          <a
+            href={waUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-display inline-flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-surface px-6 py-3 text-sm font-bold tracking-tight text-ink transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-surface-soft active:translate-y-0 sm:w-auto"
+          >
+            <LuMessageCircle size={17} className="text-primary [stroke-width:2.1]" aria-hidden="true" />
+            WhatsApp
+          </a>
+        </div>
+
+        <div class="mt-8 flex flex-col gap-3 border-t border-border pt-6 text-sm text-body sm:flex-row sm:flex-wrap sm:gap-6">
+          <a
+            href="tel:+528123540887"
+            class="inline-flex items-center gap-2.5 transition-colors duration-200 hover:text-ink"
+          >
+            <LuPhone size={16} className="text-primary [stroke-width:2]" aria-hidden="true" />
+            +52 81 2354 0887
+          </a>
+          <a
+            href={`mailto:${email}`}
+            class="inline-flex items-center gap-2.5 transition-colors duration-200 hover:text-ink"
+          >
+            <LuMail size={16} className="text-primary [stroke-width:2]" aria-hidden="true" />
+            {email}
+          </a>
+        </div>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-2">
+        {checkpoints.map(({ Icon, title, description }) => (
+          <div class="rounded-2xl border border-border bg-surface p-5 shadow-[0_24px_64px_-54px_rgba(0,0,0,0.95)]">
+            <span class="mb-5 flex h-10 w-10 items-center justify-center rounded-xl border border-primary/20 bg-primary/10 text-primary">
+              <Icon size={20} className="[stroke-width:2]" aria-hidden="true" />
+            </span>
+            <h3 class="font-display text-base font-bold tracking-[-0.02em] text-ink">{title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-body">{description}</p>
+          </div>
+        ))}
+
+        <div class="rounded-2xl border border-primary/20 bg-surface-soft p-5 sm:col-span-2">
+          <div class="flex items-center justify-between gap-4 border-b border-border pb-4">
+            <div>
+              <p class="font-display text-xs font-semibold uppercase tracking-[0.24em] text-primary">
+                Arranque
+              </p>
+              <h3 class="mt-2 font-display text-xl font-bold tracking-[-0.03em] text-ink">
+                Primer diagnóstico
+              </h3>
+            </div>
+            <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-success/25 bg-success/10 text-success">
+              <LuShieldCheck size={20} className="[stroke-width:2]" aria-hidden="true" />
+            </span>
+          </div>
+
+          <div class="mt-5 grid gap-3">
+            {steps.map((step) => (
+              <div class="flex items-center gap-3 rounded-xl border border-border bg-canvas/45 px-4 py-3">
+                <LuCircleCheck size={17} className="shrink-0 text-primary [stroke-width:2.2]" aria-hidden="true" />
+                <span class="text-sm font-medium text-ink">{step}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
