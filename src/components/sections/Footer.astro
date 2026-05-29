@@ -1,72 +1,80 @@
 ---
-const columns = [
-  {
-    title: 'Producto',
-    links: ['Monitoreo', 'Alertas', 'Dosificación', 'Reportes'],
-  },
-  {
-    title: 'Industrias',
-    links: ['Municipal', 'Alimentos', 'Bebidas', 'Industrial'],
-  },
-  {
-    title: 'Recursos',
-    links: ['Casos de uso', 'Documentación', 'Seguridad', 'Contacto'],
-  },
-  {
-    title: 'Empresa',
-    links: ['AquaSense', 'Demo', 'Soporte', 'Legal'],
-  },
+import { Mail, Phone } from 'lucide-react';
+
+const waUrl = 'https://wa.me/528123540887?text=Hola%2C%20me%20interesa%20solicitar%20una%20demo%20de%20AquaSense';
+
+const platformLinks = [
+  { label: 'Funcionalidades', href: '#funcionalidades' },
+  { label: 'Integraciones', href: '#como-funciona' },
+  { label: 'Clientes', href: '#clientes' },
+  { label: 'Contacto', href: '#contacto' },
 ];
 ---
 
-<footer class="bg-[#071B20] py-16">
-  <div class="max-w-[1200px] mx-auto px-6">
-    <!-- Top row -->
-    <div class="flex flex-col gap-2 mb-2">
-      <a href="/" class="flex items-center gap-2 font-bold text-on-dark text-lg w-fit">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#3B82C4"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/>
-          <path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/>
-        </svg>
-        AquaSense
-      </a>
-      <p class="text-muted text-sm">Plataforma de inteligencia para plantas de agua.</p>
-    </div>
+<footer class="bg-secondary py-10 md:py-12">
+  <div class="mx-auto max-w-[1200px] px-6">
+    <div class="grid gap-10 md:grid-cols-[1.2fr_0.8fr_1fr] md:items-start">
+      <div>
+        <p class="max-w-sm text-sm leading-relaxed text-on-dark/80">
+          Plataforma de inteligencia para plantas de agua. Monitoreo en tiempo real,
+          alertas automáticas y dosificación inteligente.
+        </p>
+      </div>
 
-    <!-- Separator -->
-    <div class="border-b my-8" style="border-color: rgba(255,255,255,0.1);"></div>
+      <nav aria-label="Plataforma">
+        <h2 class="text-xs font-bold uppercase tracking-[0.18em] text-on-dark/45">
+          Plataforma
+        </h2>
+        <ul class="mt-5 flex flex-col gap-3">
+          {platformLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-sm text-on-dark/85 transition-colors hover:text-on-dark"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
-    <!-- Links grid -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-      {columns.map((col) => (
-        <div>
-          <h4 class="text-on-dark font-semibold text-sm mb-4">{col.title}</h4>
-          <ul class="flex flex-col gap-2">
-            {col.links.map((link) => (
-              <li>
-                <a href="#" class="text-muted text-sm hover:text-on-dark transition-colors">
-                  {link}
-                </a>
-              </li>
-            ))}
-          </ul>
+      <div>
+        <h2 class="text-xs font-bold uppercase tracking-[0.18em] text-on-dark/45">
+          Contacto
+        </h2>
+        <div class="mt-5 flex flex-col gap-4">
+          <a
+            href="tel:+528123540887"
+            class="inline-flex items-center gap-3 text-sm text-on-dark/85 transition-colors hover:text-on-dark"
+          >
+            <Phone className="h-4 w-4 text-on-dark/45" strokeWidth={1.8} aria-hidden="true" />
+            +52 81 2354 0887
+          </a>
+          <a
+            href="mailto:pislaspro@gmail.com"
+            class="inline-flex items-center gap-3 text-sm text-on-dark/85 transition-colors hover:text-on-dark"
+          >
+            <Mail className="h-4 w-4 text-on-dark/45" strokeWidth={1.8} aria-hidden="true" />
+            pislaspro@gmail.com
+          </a>
         </div>
-      ))}
+
+        <a
+          href={waUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-5 inline-flex w-full items-center justify-center rounded-lg bg-white px-5 py-3 text-sm font-bold text-secondary transition-all duration-200 hover:-translate-y-0.5 hover:bg-on-dark active:translate-y-0"
+        >
+          Solicitar Demo
+        </a>
+      </div>
     </div>
 
-    <!-- Bottom -->
-    <div class="border-t pt-8 text-center text-muted text-sm" style="border-color: rgba(255,255,255,0.1);">
-      © 2026 AquaSense. Todos los derechos reservados. Monterrey, México · aquasense.mx
+    <div class="mt-12 border-t border-white/10 pt-8">
+      <p class="text-xs text-on-dark/45">
+        © 2026 AquaSense. Todos los derechos reservados. Monterrey, México · aquasense.mx
+      </p>
     </div>
   </div>
 </footer>

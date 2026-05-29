@@ -1,7 +1,7 @@
 ---
 import HeroDashboard from './HeroDashboard.tsx';
-
-const waUrl = 'https://wa.me/528123540887?text=Hola%2C%20me%20interesa%20solicitar%20una%20demo%20de%20AquaSense';
+import HeroIntro from './HeroIntro.tsx';
+import HeroStats from './HeroStats.tsx';
 ---
 
 <section
@@ -11,47 +11,7 @@ const waUrl = 'https://wa.me/528123540887?text=Hola%2C%20me%20interesa%20solicit
   <div class="max-w-[1200px] mx-auto px-6">
     <!-- Main grid -->
     <div class="grid md:grid-cols-[55fr_45fr] gap-12 items-center">
-      <!-- Left column -->
-      <div>
-        <!-- Badge pill -->
-        <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full text-sm font-medium text-primary" style="background: rgba(59,130,196,0.1);">
-          <span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
-          Monitoreo en tiempo real
-        </div>
-
-        <!-- Headline -->
-        <h1 class="text-5xl md:text-6xl font-bold leading-tight text-ink mb-6">
-          Tu planta de agua, monitoreada en tiempo real.
-        </h1>
-
-        <!-- Subtitle -->
-        <p class="text-lg text-body mb-8 max-w-xl leading-relaxed">
-          Plataforma de monitoreo de calidad del agua en tiempo real para plantas industriales y de tratamiento. Conectamos con sensores y PLCs existentes sin reemplazar nada.
-        </p>
-
-        <!-- CTAs -->
-        <div class="flex flex-wrap gap-4 mb-8">
-          <a
-            href={waUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-xl hover:bg-primary-dark transition-colors duration-200"
-          >
-            Solicitar demo
-          </a>
-          <a
-            href="#como-funciona"
-            class="inline-flex items-center justify-center px-6 py-3 border border-border text-ink font-semibold rounded-xl hover:bg-surface-soft transition-colors duration-200"
-          >
-            Ver cómo funciona
-          </a>
-        </div>
-
-        <!-- Trust line -->
-        <p class="text-xs text-muted">
-          Compatible con Modbus, OPC-UA, MQTT y protocolos industriales estándar.
-        </p>
-      </div>
+      <HeroIntro client:load />
 
       <!-- Right column -->
       <div class="min-h-[400px] flex items-center">
@@ -59,20 +19,6 @@ const waUrl = 'https://wa.me/528123540887?text=Hola%2C%20me%20interesa%20solicit
       </div>
     </div>
 
-    <!-- Stats row -->
-    <div class="border-t border-border mt-16 pt-12 grid grid-cols-3 gap-8 text-center">
-      <div>
-        <p class="text-3xl md:text-4xl font-bold text-ink">99.9%</p>
-        <p class="text-sm text-body mt-1">Uptime garantizado</p>
-      </div>
-      <div>
-        <p class="text-3xl md:text-4xl font-bold text-ink">+200</p>
-        <p class="text-sm text-body mt-1">Plantas monitoreadas</p>
-      </div>
-      <div>
-        <p class="text-3xl md:text-4xl font-bold text-ink">24/7</p>
-        <p class="text-sm text-body mt-1">Soporte técnico</p>
-      </div>
-    </div>
+    <HeroStats client:visible />
   </div>
 </section>

@@ -3,12 +3,10 @@ import Layout from '../components/Layout.astro';
 import Navbar from '../components/navbar/Navbar.astro';
 import MobileMenu from '../components/navbar/MobileMenu.tsx';
 import HeroSection from '../components/hero/HeroSection.astro';
-import LogoMarquee from '../components/sections/LogoMarquee.astro';
 import ProblemSection from '../components/sections/ProblemSection.astro';
 import SolutionSection from '../components/sections/SolutionSection.astro';
 import HowItWorks from '../components/sections/HowItWorks.astro';
 import AutomationSection from '../components/sections/AutomationSection.astro';
-import MetricsSection from '../components/sections/MetricsSection.tsx';
 import UseCasesSection from '../components/sections/UseCasesSection.astro';
 import ReportsSection from '../components/sections/ReportsSection.astro';
 import TestimonialsSection from '../components/sections/TestimonialsSection.astro';
@@ -21,12 +19,10 @@ import Footer from '../components/sections/Footer.astro';
   <MobileMenu client:load />
   <main>
     <HeroSection />
-    <LogoMarquee />
     <ProblemSection />
     <SolutionSection />
     <HowItWorks />
     <AutomationSection />
-    <MetricsSection client:visible />
     <UseCasesSection />
     <ReportsSection />
     <TestimonialsSection />
