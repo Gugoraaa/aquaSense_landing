@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BriefcaseBusiness, Cpu, Droplets, Home, UsersRound, X } from 'lucide-react';
+import { BriefcaseBusiness, CircleDollarSign, Cpu, Droplets, Home, UsersRound, X } from 'lucide-react';
 
 const waUrl = 'https://wa.me/528123540887?text=Hola%2C%20me%20interesa%20solicitar%20una%20demo%20de%20AquaSense';
 
@@ -11,6 +11,7 @@ const navLinks = [
   { label: 'Servicios', href: '#servicios', Icon: BriefcaseBusiness },
   { label: 'Proceso', href: '#como-funciona', Icon: Droplets },
   { label: 'Tecnología', href: '#funcionalidades', Icon: Cpu },
+  { label: 'Planes', href: '#planes', Icon: CircleDollarSign },
   { label: 'Clientes', href: '#clientes', Icon: UsersRound },
 ];
 

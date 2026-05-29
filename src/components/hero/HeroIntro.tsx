@@ -66,15 +66,6 @@ export default function HeroIntro() {
           Ver cómo funciona
         </a>
       </motion.div>
-
-      <motion.p
-        className="text-xs text-muted"
-        initial={revealInitial}
-        animate={revealAnimate}
-        transition={heroSyncTransition(0.72)}
-      >
-        Compatible con Modbus, OPC-UA, MQTT y protocolos industriales estándar.
-      </motion.p>
     </div>
   );
 }

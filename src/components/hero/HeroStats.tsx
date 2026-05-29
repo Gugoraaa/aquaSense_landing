@@ -2,6 +2,7 @@
 
 import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+import { statsSettleMilliseconds, statsSyncTransition } from './motionConfig';
 
 type Stat =
   | {
@@ -40,7 +41,7 @@ function useCountUp(target: number, active: boolean, decimals = 0) {
 
     let frame = 0;
     let start: number | null = null;
-    const duration = 1100;
+    const duration = statsSettleMilliseconds;
 
     const tick = (timestamp: number) => {
       if (start === null) start = timestamp;
@@ -77,7 +78,7 @@ function TextStatValue({ stat, active }: { stat: Extract<Stat, { kind: 'text' }>
     <motion.span
       initial={{ opacity: 0, y: 8 }}
       animate={active ? { opacity: 1, y: 0 } : undefined}
-      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+      transition={statsSyncTransition(0.16)}
     >
       {stat.value}
     </motion.span>
@@ -99,11 +100,7 @@ export default function HeroStats() {
           className={stat.kind === 'text' ? 'col-span-2 md:col-span-1' : undefined}
           initial={{ opacity: 0, y: 14 }}
           animate={isInView ? { opacity: 1, y: 0 } : undefined}
-          transition={{
-            delay: index * 0.08,
-            duration: 0.46,
-            ease: [0.16, 1, 0.3, 1],
-          }}
+          transition={statsSyncTransition(index * 0.08)}
         >
           <p className="text-3xl md:text-4xl font-bold text-ink tabular-nums">
             {stat.kind === 'number' ? (
