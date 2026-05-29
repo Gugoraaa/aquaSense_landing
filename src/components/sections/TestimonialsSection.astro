@@ -1,0 +1,29 @@
+---
+import SectionHeader from '../shared/SectionHeader.astro';
+---
+
+<section id="clientes" class="bg-canvas py-24">
+  <div class="max-w-[1200px] mx-auto px-6">
+    <SectionHeader
+      eyebrow="Clientes"
+      title="Lo que dicen nuestros clientes."
+      center
+    />
+
+    <div class="max-w-2xl mx-auto bg-surface border border-border rounded-2xl p-8">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-12 h-12 rounded-full bg-muted/20 flex items-center justify-center text-muted font-bold text-xl flex-shrink-0">
+          ?
+        </div>
+        <div>
+          <p class="font-bold text-ink">Tu nombre aquí</p>
+          <p class="text-muted text-sm">Director de Operaciones · Planta XYZ</p>
+        </div>
+      </div>
+
+      <blockquote class="text-body italic text-base leading-relaxed">
+        "Espacio para tu testimonio — pronto aquí."
+      </blockquote>
+    </div>
+  </div>
+</section>

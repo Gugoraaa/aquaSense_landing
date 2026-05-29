@@ -1,0 +1,28 @@
+---
+const brands = [
+  'FEMSA',
+  'Grupo Lala',
+  'Arca Continental',
+  'Sigma Alimentos',
+  'Vitro',
+  'AHMSA',
+];
+---
+
+<section style="background: #F0F5F3;" class="py-12 overflow-hidden">
+  <div class="max-w-[1200px] mx-auto px-6">
+    <p class="text-xs font-semibold uppercase tracking-widest text-muted text-center mb-8">
+      Confían en AquaSense
+    </p>
+  </div>
+
+  <div class="overflow-hidden">
+    <div class="flex gap-16 w-max animate-marquee">
+      {[...brands, ...brands].map((brand, i) => (
+        <span key={i} class="font-bold text-muted text-lg whitespace-nowrap">
+          {brand}
+        </span>
+      ))}
+    </div>
+  </div>
+</section>

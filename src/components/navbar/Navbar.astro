@@ -1,0 +1,217 @@
+---
+import { BriefcaseBusiness, Cpu, Droplets, Home, Menu, UsersRound } from 'lucide-react';
+
+const waUrl = 'https://wa.me/528123540887?text=Hola%2C%20me%20interesa%20solicitar%20una%20demo%20de%20AquaSense';
+---
+
+<header
+  id="main-nav"
+  class="sticky top-3 z-50 px-4 transition-transform duration-300"
+>
+  <div
+    class="nav-shell mx-auto flex h-14 w-full max-w-[1280px] items-center justify-between rounded-full border border-white/70 bg-white/90 px-4 shadow-[0_18px_48px_-32px_rgba(7,27,32,0.42)] backdrop-blur-2xl transition-all duration-300 md:h-16 md:px-6"
+  >
+    <a href="/" class="flex min-w-[150px] items-center text-lg font-bold tracking-tight text-ink">
+      AquaSense<span class="text-primary">.</span>
+    </a>
+
+    <nav
+      aria-label="Navegación principal"
+      class="nav-menu hidden items-center rounded-full border border-border/80 bg-surface/80 px-2 py-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] lg:flex"
+    >
+      <a href="/" class="nav-link is-active" data-nav-item data-section="inicio" aria-label="Inicio" aria-current="page" title="Inicio">
+        <Home className="h-[18px] w-[18px]" strokeWidth={2.25} aria-hidden="true" />
+        <span class="nav-label">Inicio</span>
+      </a>
+      <a href="#servicios" class="nav-link" data-nav-item data-section="servicios" aria-label="Servicios" title="Servicios">
+        <BriefcaseBusiness className="h-[18px] w-[18px]" strokeWidth={2.25} aria-hidden="true" />
+        <span class="nav-label">Servicios</span>
+      </a>
+      <a href="#como-funciona" class="nav-link" data-nav-item data-section="como-funciona" aria-label="Proceso" title="Proceso">
+        <Droplets className="h-[18px] w-[18px]" strokeWidth={2.25} aria-hidden="true" />
+        <span class="nav-label">Proceso</span>
+      </a>
+      <a href="#funcionalidades" class="nav-link" data-nav-item data-section="funcionalidades" aria-label="Tecnología" title="Tecnología">
+        <Cpu className="h-[18px] w-[18px]" strokeWidth={2.25} aria-hidden="true" />
+        <span class="nav-label">Tecnología</span>
+      </a>
+      <a href="#clientes" class="nav-link" data-nav-item data-section="clientes" aria-label="Clientes" title="Clientes">
+        <UsersRound className="h-[18px] w-[18px]" strokeWidth={2.25} aria-hidden="true" />
+        <span class="nav-label">Clientes</span>
+      </a>
+    </nav>
+
+    <a
+      href={waUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hidden items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_24px_-16px_rgba(59,130,196,0.95)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-dark active:translate-y-0 md:inline-flex"
+    >
+      Solicitar demo
+    </a>
+
+    <button
+      id="hamburger-btn"
+      class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/80 bg-surface text-primary transition-colors duration-200 hover:bg-surface-soft lg:hidden"
+      aria-label="Abrir menú"
+    >
+      <Menu className="h-5 w-5" strokeWidth={2.2} aria-hidden="true" />
+    </button>
+  </div>
+</header>
+
+<style>
+  #main-nav.is-scrolled .nav-shell {
+    border-color: rgba(221, 232, 228, 0.92);
+    box-shadow: 0 20px 54px -28px rgba(7, 27, 32, 0.55);
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    padding: 0 0.68rem;
+    color: #52615D;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    line-height: 1;
+    text-transform: uppercase;
+    transition:
+      color 200ms ease,
+      background-color 200ms ease,
+      gap 240ms cubic-bezier(0.16, 1, 0.3, 1),
+      padding 240ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 200ms ease;
+  }
+
+  .nav-label {
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transition:
+      max-width 240ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 160ms ease;
+  }
+
+  .nav-link :global(svg) {
+    color: #3B82C4;
+    flex: none;
+  }
+
+  .nav-link:hover,
+  .nav-link:focus-visible,
+  .nav-link.is-active {
+    background: rgba(238, 246, 244, 0.9);
+    color: #10201D;
+  }
+
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    transform: translateY(-1px);
+  }
+
+  .nav-link:focus-visible {
+    outline: 2px solid rgba(59, 130, 196, 0.35);
+    outline-offset: 2px;
+  }
+
+  .nav-link:hover,
+  .nav-link:focus-visible,
+  .nav-link.is-active {
+    gap: 0.55rem;
+    padding-inline: 0.85rem;
+  }
+
+  .nav-link:hover .nav-label,
+  .nav-link:focus-visible .nav-label,
+  .nav-link.is-active .nav-label {
+    max-width: 9rem;
+    opacity: 1;
+  }
+
+  .nav-menu:has(.nav-link:hover) .nav-link.is-active:not(:hover),
+  .nav-menu:has(.nav-link:focus-visible) .nav-link.is-active:not(:focus-visible) {
+    gap: 0;
+    padding-inline: 0.68rem;
+  }
+
+  .nav-menu:has(.nav-link:hover) .nav-link.is-active:not(:hover) .nav-label,
+  .nav-menu:has(.nav-link:focus-visible) .nav-link.is-active:not(:focus-visible) .nav-label {
+    max-width: 0;
+    opacity: 0;
+  }
+</style>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  const navItems = Array.from(document.querySelectorAll('[data-nav-item]'));
+
+  const setActiveNavItem = (sectionId) => {
+    navItems.forEach((item) => {
+      const isActive = item.getAttribute('data-section') === sectionId;
+      item.classList.toggle('is-active', isActive);
+
+      if (isActive) {
+        item.setAttribute('aria-current', 'page');
+      } else {
+        item.removeAttribute('aria-current');
+      }
+    });
+  };
+
+  const getSectionFromHash = () => {
+    const hash = window.location.hash.replace('#', '');
+    return hash || 'inicio';
+  };
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 10) {
+      nav?.classList.add('is-scrolled');
+    } else {
+      nav?.classList.remove('is-scrolled');
+    }
+
+    if (window.scrollY < 240) {
+      setActiveNavItem('inicio');
+    }
+  });
+
+  navItems.forEach((item) => {
+    item.addEventListener('click', () => {
+      setActiveNavItem(item.getAttribute('data-section') || 'inicio');
+    });
+  });
+
+  window.addEventListener('hashchange', () => setActiveNavItem(getSectionFromHash()));
+
+  const sections = navItems
+    .map((item) => item.getAttribute('data-section'))
+    .filter((sectionId) => sectionId && sectionId !== 'inicio')
+    .map((sectionId) => document.getElementById(sectionId))
+    .filter(Boolean);
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visibleEntry = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (visibleEntry?.target?.id) {
+        setActiveNavItem(visibleEntry.target.id);
+      }
+    },
+    {
+      rootMargin: '-22% 0px -58% 0px',
+      threshold: [0.18, 0.32, 0.5],
+    }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+  setActiveNavItem(getSectionFromHash());
+</script>

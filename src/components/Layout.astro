@@ -1,0 +1,32 @@
+---
+import '../styles/global.css';
+
+const title = 'AquaSense — Tu planta de agua, siempre bajo control';
+const description = 'Plataforma de monitoreo de calidad del agua en tiempo real para plantas industriales y de tratamiento. Conectamos con sensores y PLCs existentes sin reemplazar nada.';
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:type" content="website" />
+
+    <!-- Google Fonts preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,65 @@
+---
+import SectionHeader from '../shared/SectionHeader.astro';
+
+const steps = [
+  {
+    num: '01',
+    title: 'Sensores y PLCs existentes',
+    description: 'Compatible con equipos de campo y protocolos industriales. Sin reemplazar nada.',
+    tags: ['Modbus', 'OPC-UA', 'MQTT'],
+  },
+  {
+    num: '02',
+    title: 'Gateway de conectividad',
+    description: 'Centraliza datos sin interrumpir la operación ni requerir obra civil.',
+    tags: ['Sin obra', 'Plug & play'],
+  },
+  {
+    num: '03',
+    title: 'AquaSense Cloud',
+    description: 'Procesamiento en tiempo real, históricos ilimitados y detección de anomalías con IA.',
+    tags: ['IA', '99.9% uptime'],
+  },
+  {
+    num: '04',
+    title: 'Dashboard y acciones',
+    description: 'Visualiza, recibe alertas y genera reportes desde cualquier dispositivo.',
+    tags: ['Web', 'Móvil', 'WhatsApp'],
+  },
+];
+---
+
+<section id="como-funciona" class="bg-[#EEF6F4] py-24">
+  <div class="max-w-[1200px] mx-auto px-6">
+    <SectionHeader
+      eyebrow="Proceso"
+      title="Conecta tu infraestructura actual sin reemplazarla."
+      center
+    />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+      {steps.map((step) => (
+        <div class="flex flex-col gap-4">
+          <!-- Number circle -->
+          <div class="w-12 h-12 rounded-full bg-primary text-white font-bold flex items-center justify-center text-lg flex-shrink-0">
+            {step.num}
+          </div>
+
+          <div>
+            <h3 class="font-bold text-ink mb-2">{step.title}</h3>
+            <p class="text-body text-sm leading-relaxed mb-4">{step.description}</p>
+
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2">
+              {step.tags.map((tag) => (
+                <span class="text-xs font-medium px-3 py-1 rounded-full" style="background: rgba(59,130,196,0.1); color: #2563A8;">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

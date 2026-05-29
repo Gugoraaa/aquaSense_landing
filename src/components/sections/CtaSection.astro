@@ -1,0 +1,58 @@
+---
+const waUrl = 'https://wa.me/528123540887?text=Hola%2C%20me%20interesa%20solicitar%20una%20demo%20de%20AquaSense';
+---
+
+<section
+  id="contacto"
+  class="py-32 text-center"
+  style="background: radial-gradient(circle at 50% 50%, rgba(59,130,196,0.15), transparent 60%), #071B20;"
+>
+  <div class="max-w-[1200px] mx-auto px-6">
+    <h2 class="text-4xl md:text-5xl font-bold text-white leading-tight max-w-3xl mx-auto">
+      Lleva tu planta de agua a una operación inteligente.
+    </h2>
+
+    <p class="mt-6 text-lg max-w-xl mx-auto leading-relaxed" style="color: rgba(247,250,250,0.7);">
+      Plataforma de monitoreo de calidad del agua en tiempo real para plantas industriales y de tratamiento. Conectamos con sensores y PLCs existentes sin reemplazar nada.
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex gap-4 justify-center flex-wrap mt-8">
+      <a
+        href={waUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-xl hover:bg-primary-dark transition-colors duration-200"
+      >
+        Solicitar demo
+      </a>
+      <a
+        href={waUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center px-6 py-3 font-semibold rounded-xl transition-colors duration-200 text-white"
+        style="border: 1px solid rgba(255,255,255,0.3);"
+        onmouseover="this.style.background='rgba(255,255,255,0.1)'"
+        onmouseout="this.style.background='transparent'"
+      >
+        Contactar por WhatsApp
+      </a>
+    </div>
+
+    <!-- Contact row -->
+    <div class="mt-10 flex gap-8 justify-center flex-wrap text-muted text-sm">
+      <a
+        href="tel:+528123540887"
+        class="hover:text-on-dark transition-colors"
+      >
+        📞 +52 81 2354 0887
+      </a>
+      <a
+        href="mailto:pislaspro@gmail.com"
+        class="hover:text-on-dark transition-colors"
+      >
+        ✉️ pislaspro@gmail.com
+      </a>
+    </div>
+  </div>
+</section>
