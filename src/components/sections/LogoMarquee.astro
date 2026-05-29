@@ -18,8 +18,8 @@ const brands = [
 
   <div class="overflow-hidden">
     <div class="flex gap-16 w-max animate-marquee">
-      {[...brands, ...brands].map((brand, i) => (
-        <span key={i} class="font-bold text-muted text-lg whitespace-nowrap">
+      {[...brands, ...brands].map((brand) => (
+        <span class="font-bold text-muted text-lg whitespace-nowrap">
           {brand}
         </span>
       ))}

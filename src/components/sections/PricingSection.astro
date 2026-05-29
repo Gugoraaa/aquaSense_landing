@@ -126,7 +126,7 @@ const groups = [
               <div class="relative">
                 {plan.recommended && (
                   <span class="absolute left-1/2 top-0 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 rounded-full border border-primary/40 bg-primary px-3 py-1 text-[0.62rem] font-medium uppercase tracking-[0.2em] text-white shadow-[0_16px_34px_-22px_rgba(47,111,229,0.95)]">
-                    <LuSparkles size={13} strokeWidth={2.2} aria-hidden="true" />
+                    <LuSparkles size={13} className="[stroke-width:2.2]" aria-hidden="true" />
                     Recomendado
                   </span>
                 )}
@@ -189,9 +189,9 @@ const groups = [
                             aria-label={included ? 'Incluido' : 'No incluido'}
                           >
                             {included ? (
-                              <LuCheck size={17} strokeWidth={2.5} aria-hidden="true" />
+                              <LuCheck size={17} className="[stroke-width:2.5]" aria-hidden="true" />
                             ) : (
-                              <LuMinus size={15} strokeWidth={2} aria-hidden="true" />
+                              <LuMinus size={15} aria-hidden="true" />
                             )}
                           </span>
                         </div>

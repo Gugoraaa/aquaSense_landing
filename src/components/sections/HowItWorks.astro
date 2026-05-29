@@ -1,5 +1,6 @@
 ---
-import { LuCpu, LuRouter, LuCloudCog, LuMonitorSmartphone } from 'react-icons/lu';
+import { LuCpu, LuRouter, LuMonitorSmartphone } from 'react-icons/lu';
+import { TiCloudStorageOutline } from 'react-icons/ti';
 
 const steps = [
   {
@@ -21,7 +22,7 @@ const steps = [
     title: 'AquaSense Cloud',
     description: 'Procesamiento en tiempo real, históricos ilimitados y detección de anomalías con IA.',
     tags: ['IA', '99.9% uptime'],
-    Icon: LuCloudCog,
+    Icon: TiCloudStorageOutline,
   },
   {
     num: '04',
@@ -60,7 +61,14 @@ const steps = [
             </div>
 
             <div class="process-card flex h-full min-h-[310px] flex-col rounded-lg border border-border bg-surface px-6 py-7 shadow-[0_22px_50px_-32px_rgba(0,0,0,0.8)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_58px_-32px_rgba(0,0,0,0.9)]">
-              <Icon size={58} strokeWidth={1.7} className="mb-8 text-primary" aria-hidden="true" />
+              <div class="process-icon mb-7 flex h-11 w-11 items-center justify-center rounded-md border border-primary/20 bg-primary/[0.055] text-primary shadow-[inset_0_1px_0_rgba(255,255,255,0.07)]">
+                <Icon
+                  size={title === 'AquaSense Cloud' ? 32 : 24}
+                  strokeWidth={1.75}
+                  className={title === 'AquaSense Cloud' ? 'block translate-y-px scale-[1.05] overflow-visible' : 'block overflow-visible'}
+                  aria-hidden="true"
+                />
+              </div>
 
               <h3 class="mb-3 text-base font-extrabold leading-tight text-ink">
                 {title}
@@ -150,6 +158,27 @@ const steps = [
   .process-card {
     position: relative;
     z-index: 1;
+  }
+
+  .process-icon {
+    color: #6fb6f7;
+    line-height: 0;
+    transition:
+      border-color 300ms ease,
+      background-color 300ms ease,
+      transform 300ms ease;
+  }
+
+  :global(.process-icon svg) {
+    display: block;
+    flex: 0 0 auto;
+    overflow: visible;
+  }
+
+  .process-card:hover .process-icon {
+    border-color: rgba(111, 182, 247, 0.34);
+    background-color: rgba(79, 155, 232, 0.1);
+    transform: translateY(-1px);
   }
 
   .process-card::before {
