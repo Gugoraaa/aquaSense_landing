@@ -59,7 +59,7 @@ export default function MobileMenu() {
             className="fixed right-3 top-3 z-[70] flex h-[calc(100dvh-1.5rem)] w-[min(21rem,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-[1.75rem] border border-white/10 bg-surface/95 shadow-[0_24px_70px_-28px_rgba(0,0,0,0.9)] backdrop-blur-2xl"
           >
             <div className="flex h-16 items-center justify-between border-b border-border/80 px-6">
-              <span className="text-lg font-bold tracking-tight text-ink">
+              <span className="font-display text-lg font-bold tracking-[-0.03em] text-ink">
                 AquaSense<span className="text-primary">.</span>
               </span>
               <button
@@ -98,7 +98,7 @@ export default function MobileMenu() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
-                className="inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_24px_-16px_rgba(59,130,196,0.95)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-dark active:translate-y-0"
+                className="font-display inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-bold tracking-tight text-white shadow-[0_12px_24px_-16px_rgba(59,130,196,0.95)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-dark active:translate-y-0"
               >
                 Solicitar demo
               </a>

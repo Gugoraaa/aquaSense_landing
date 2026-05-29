@@ -28,7 +28,7 @@ export default function HeroIntro() {
       </motion.div>
 
       <motion.h1
-        className="text-5xl md:text-6xl font-bold leading-tight text-ink mb-6"
+        className="font-display text-5xl md:text-6xl font-extrabold tracking-[-0.04em] leading-[1.0] text-ink mb-6"
         initial={revealInitial}
         animate={revealAnimate}
         transition={heroSyncTransition(0)}
@@ -55,13 +55,13 @@ export default function HeroIntro() {
           href={waUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-dark active:translate-y-0"
+          className="font-display inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-bold tracking-tight rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-dark active:translate-y-0"
         >
           Solicitar demo
         </a>
         <a
           href="#como-funciona"
-          className="inline-flex items-center justify-center px-6 py-3 border border-border text-ink font-semibold rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:bg-surface-soft active:translate-y-0"
+          className="font-display inline-flex items-center justify-center px-6 py-3 border border-border text-ink font-bold tracking-tight rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:bg-surface-soft active:translate-y-0"
         >
           Ver cómo funciona
         </a>

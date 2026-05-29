@@ -102,7 +102,7 @@ export default function HeroStats() {
           animate={isInView ? { opacity: 1, y: 0 } : undefined}
           transition={statsSyncTransition(index * 0.08)}
         >
-          <p className="text-3xl md:text-4xl font-bold text-ink tabular-nums">
+          <p className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-ink tabular-nums">
             {stat.kind === 'number' ? (
               <NumberStatValue stat={stat} active={isInView} />
             ) : (

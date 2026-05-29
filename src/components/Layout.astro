@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Preloader from './Preloader.tsx';
 
 const title = 'AquaSense — Tu planta de agua, siempre bajo control';
 const description = 'Plataforma de monitoreo de calidad del agua en tiempo real para plantas industriales y de tratamiento. Conectamos con sensores y PLCs existentes sin reemplazar nada.';
@@ -27,6 +28,7 @@ const description = 'Plataforma de monitoreo de calidad del agua en tiempo real 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
   <body>
+    <Preloader client:load />
     <slot />
   </body>
 </html>
