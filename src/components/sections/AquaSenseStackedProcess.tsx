@@ -14,12 +14,13 @@ type ProcessStep = {
   result: string;
 };
 
-type StackCardStyle = CSSProperties & {
-  '--stack-y': string;
-};
-
-const initialY = [0, 360, 720, 1080];
-const finalY = [0, 80, 160, 240];
+// Controles del stack (fáciles de tunear):
+//  --stack-gap    → separación vertical de la columna inicial (cards separadas)
+//  --stack-offset → desplazamiento entre cards ya apiladas (cuánto asoma cada una)
+const stackVars = {
+  '--stack-gap': '28px',
+  '--stack-offset': '96px',
+} as CSSProperties;
 
 const steps: ProcessStep[] = [
   {
@@ -105,56 +106,102 @@ function AquaSenseStackedProcess() {
             return undefined;
           }
 
-          gsap.set(stack, { perspective: 900 });
-          gsap.set(cards, {
-            scale: 1,
-            transformOrigin: '50% 0%',
-            willChange: 'transform',
+          const css = getComputedStyle(stack);
+          const GAP = parseFloat(css.getPropertyValue('--stack-gap')) || 28;
+          const STACK_OFFSET = parseFloat(css.getPropertyValue('--stack-offset')) || 96;
+
+          // 1) Posiciones acumulativas a partir de las alturas reales de cada card.
+          //    initialY = columna separada y limpia (gap real, sin overlap).
+          //    finalY   = stack compacto con un offset uniforme entre cards.
+          const heights = cards.map((card) => card.offsetHeight);
+          const initialY: number[] = [];
+          const finalY: number[] = [];
+          let acc = 0;
+          cards.forEach((_, index) => {
+            initialY[index] = acc;
+            acc += heights[index] + GAP;
+            finalY[index] = index * STACK_OFFSET;
           });
 
+          // Altura del contenedor = la del stack ya colapsado, para no dejar un
+          // hueco gigante una vez que termina la animación.
+          const finalStackHeight = Math.max(
+            ...cards.map((_, index) => finalY[index] + heights[index]),
+          );
+
+          // Cuánto se cierra cada "eslabón" entre la card m-1 y la m al apilarse.
+          // En la fase m se mueve la card m y TODAS las inferiores esta distancia.
+          const collapse = (m: number) => heights[m - 1] + GAP - STACK_OFFSET;
+          const collapsePrefix = [0];
+          for (let m = 1; m < cards.length; m += 1) {
+            collapsePrefix[m] = collapsePrefix[m - 1] + collapse(m);
+          }
+
+          gsap.set(stack, { perspective: 1200, minHeight: finalStackHeight });
           cards.forEach((card, index) => {
             gsap.set(card, {
+              position: 'absolute',
+              left: 0,
+              right: 0,
+              top: 0,
+              y: initialY[index],
               zIndex: index + 1,
-              rotate: 0,
-              y: initialY[index] ?? index * 360,
+              scale: 1,
+              opacity: 1,
+              transformOrigin: '50% 0%',
+              willChange: 'transform',
             });
           });
 
           const timeline = gsap.timeline({
+            // Lineal: bajo scrub es lo más continuo y fluido, sin frenones entre
+            // fases. La sensación de rapidez la da la distancia de scroll corta.
             defaults: { ease: 'none' },
             scrollTrigger: {
               trigger: section,
               pin,
               start: 'top top',
-              end: () => `+=${Math.max(1450, window.innerHeight * 1.85)}`,
-              scrub: 0.35,
+              // Distancia de scroll más corta = el stack se arma rápido y no se
+              // siente pesado. ~280px por fase.
+              end: () => `+=${Math.max(820, (cards.length - 1) * 280)}`,
+              scrub: 0.25,
               anticipatePin: 1,
               invalidateOnRefresh: true,
             },
           });
 
-          cards.slice(1).forEach((card, index) => {
-            const activeIndex = index + 1;
-            const startAt = index;
+          // 2) Trailing stack: en cada fase k la card k se acomoda sobre la k-1 y
+          //    todas las cards inferiores (k..n) se desplazan la MISMA distancia en
+          //    el mismo instante, por lo que la suben acompañando. Como los targets
+          //    son acumulativos y absolutos, la columna nunca abre huecos ni deja
+          //    cards rezagadas abajo.
+          for (let k = 1; k < cards.length; k += 1) {
+            for (let i = k; i < cards.length; i += 1) {
+              timeline.to(
+                cards[i],
+                { y: initialY[i] - collapsePrefix[k], duration: 1 },
+                k - 1,
+              );
+            }
 
-            timeline.set(card, { zIndex: activeIndex + 1 }, startAt);
+            // La card que queda detrás se reduce un pelín para dar profundidad,
+            // pero se mantiene 100% opaca (sin transparencia entre cards).
             timeline.to(
-              card,
-              {
-                y: finalY[activeIndex] ?? activeIndex * 80,
-                duration: 0.72,
-              },
-              startAt,
+              cards[k - 1],
+              { scale: 0.985, duration: 0.6 },
+              k - 1,
             );
-          });
+          }
 
-          timeline.to({}, { duration: 0.18 });
+          // Sostén mínimo al final del scrubbing antes de soltar el pin.
+          timeline.to({}, { duration: 0.12 });
 
           requestAnimationFrame(() => ScrollTrigger.refresh());
 
           return () => {
             timeline.kill();
-            gsap.set(cards, { clearProps: 'transform,opacity,willChange,zIndex' });
+            gsap.set(cards, { clearProps: 'all' });
+            gsap.set(stack, { clearProps: 'all' });
           };
         });
       }, sectionRef);
@@ -173,12 +220,12 @@ function AquaSenseStackedProcess() {
     <section
       id="como-funciona"
       ref={sectionRef}
-      className="relative isolate overflow-hidden bg-[#050816] text-[#F8FAFC]"
+      className="relative isolate overflow-hidden bg-canvas text-[#F8FAFC]"
     >
       <div ref={pinRef} className="relative min-h-[100dvh] py-20 md:py-24 lg:py-28">
         <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[0.9fr_1.4fr] lg:items-start lg:gap-16">
           <div className="lg:sticky lg:top-28">
-            <p className="mb-5 text-xs font-bold uppercase tracking-[0.32em] text-[#5EEAD4]">
+            <p className="mb-5 text-xs font-bold uppercase tracking-[0.32em] text-primary">
               PROCESO
             </p>
             <h2 className="max-w-xl font-display text-4xl font-black leading-[1.02] tracking-[-0.045em] text-[#F8FAFC] md:text-5xl">
@@ -194,13 +241,13 @@ function AquaSenseStackedProcess() {
                 href={demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#5EEAD4] px-6 py-3 text-sm font-bold text-[#04171C] shadow-[0_14px_30px_-24px_rgba(94,234,212,0.72)] transition-[transform,box-shadow,background-color] duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#7CF7EF] hover:shadow-[0_18px_36px_-24px_rgba(94,234,212,0.78)] active:translate-y-0"
+                className="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-bold text-white shadow-[0_14px_30px_-24px_rgba(79,155,232,0.72)] transition-[transform,box-shadow,background-color] duration-300 ease-out hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-[0_18px_36px_-24px_rgba(79,155,232,0.78)] active:translate-y-0"
               >
                 Solicitar demo
               </a>
               <a
                 href="#planes"
-                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.03] px-6 py-3 text-sm font-bold text-[#F8FAFC] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] transition-[transform,background-color,border-color] duration-300 ease-out hover:-translate-y-0.5 hover:border-[#5EEAD4]/30 hover:bg-[#5EEAD4]/[0.06] active:translate-y-0"
+                className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.03] px-6 py-3 text-sm font-bold text-[#F8FAFC] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] transition-[transform,background-color,border-color] duration-300 ease-out hover:-translate-y-0.5 hover:border-primary/30 hover:bg-primary/[0.06] active:translate-y-0"
               >
                 Ver planes
               </a>
@@ -209,70 +256,47 @@ function AquaSenseStackedProcess() {
 
           <div
             ref={stackRef}
-            className="aquasense-stack-stage relative grid gap-5 lg:min-h-[1420px] lg:block"
+            style={stackVars}
+            className="aquasense-stack-stage relative flex flex-col gap-6"
             aria-label="Proceso de implementación de AquaSense"
           >
-            {steps.map((step, index) => {
-              const cardStyle: StackCardStyle = {
-                '--stack-y': `${initialY[index] ?? index * 360}px`,
-              };
+            {steps.map((step, index) => (
+              <article
+                key={step.number}
+                ref={(node) => {
+                  cardRefs.current[index] = node;
+                }}
+                className="aquasense-stack-card relative overflow-hidden rounded-2xl border border-border bg-surface p-5 shadow-[0_20px_46px_-42px_rgba(0,0,0,0.95)] transition-[border-color,box-shadow] duration-300 ease-out hover:border-white/[0.14] hover:shadow-[0_24px_52px_-44px_rgba(0,0,0,0.98)] lg:min-h-[320px]"
+              >
+                <div className="relative grid h-full gap-4 md:grid-cols-[4.35rem_1fr]">
+                  <span className="font-display text-[2.35rem] font-black leading-none tracking-[-0.04em] text-primary md:text-[2.65rem]">
+                    {step.number}
+                  </span>
 
-              return (
-                <article
-                  key={step.number}
-                  ref={(node) => {
-                    cardRefs.current[index] = node;
-                  }}
-                  style={cardStyle}
-                  className="aquasense-stack-card relative overflow-hidden rounded-[22px] border border-white/[0.08] bg-[rgba(8,12,24,0.98)] p-5 shadow-[0_20px_46px_-42px_rgba(0,0,0,0.95),inset_0_1px_0_rgba(255,255,255,0.045)] transition-[transform,border-color,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:border-white/[0.14] hover:shadow-[0_24px_52px_-44px_rgba(0,0,0,0.98),inset_0_1px_0_rgba(255,255,255,0.06)] lg:absolute lg:inset-x-0 lg:top-0 lg:min-h-[320px] lg:translate-y-[var(--stack-y)] lg:p-5"
-                >
-                  <div className="relative grid h-full gap-4 md:grid-cols-[4.35rem_1fr]">
-                    <span className="font-display text-[2.35rem] font-black leading-none tracking-[-0.04em] text-[#5EEAD4] md:text-[2.65rem]">
-                      {step.number}
-                    </span>
+                  <div className="flex min-w-0 flex-col">
+                    <h3 className="max-w-2xl font-display text-[1.2rem] font-black leading-tight tracking-[-0.02em] text-[#F8FAFC] md:text-[1.45rem]">
+                      {step.title}
+                    </h3>
 
-                    <div className="flex min-w-0 flex-col">
-                      <h3 className="max-w-2xl font-display text-[1.2rem] font-black leading-tight tracking-[-0.02em] text-[#F8FAFC] md:text-[1.45rem]">
-                        {step.title}
-                      </h3>
+                    <ul className="mt-4 grid gap-2 text-sm leading-6 text-[#B8C7CC] md:text-[0.88rem]">
+                      {step.bullets.map((bullet) => (
+                        <li key={bullet} className="flex gap-3">
+                          <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
 
-                      <ul className="mt-4 grid gap-2 text-sm leading-6 text-[#B8C7CC] md:text-[0.88rem]">
-                        {step.bullets.map((bullet) => (
-                          <li key={bullet} className="flex gap-3">
-                            <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#5EEAD4]" />
-                            <span>{bullet}</span>
-                          </li>
-                        ))}
-                      </ul>
-
-                      <div className="mt-4 border-t border-white/[0.08] pt-3 text-sm font-semibold leading-6 text-[#E2F7F6] md:mt-auto md:text-[0.88rem]">
-                        {step.result}
-                      </div>
+                    <div className="mt-4 border-t border-white/[0.08] pt-3 text-sm font-semibold leading-6 text-[#DCE8F8] md:mt-auto md:text-[0.88rem]">
+                      {step.result}
                     </div>
                   </div>
-                </article>
-              );
-            })}
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 1023px), (prefers-reduced-motion: reduce) {
-          .aquasense-stack-stage {
-            min-height: auto !important;
-            display: grid !important;
-            gap: 1.25rem !important;
-          }
-
-          .aquasense-stack-card {
-            position: relative !important;
-            inset: auto !important;
-            transform: none !important;
-            opacity: 1 !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }

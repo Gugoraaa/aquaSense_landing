@@ -2,14 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LuBriefcaseBusiness, LuCircleDollarSign, LuCpu, LuDroplets, LuHouse, LuUsersRound, LuX } from 'react-icons/lu';
+import { LuCircleDollarSign, LuCpu, LuDroplets, LuHouse, LuUsersRound, LuX } from 'react-icons/lu';
 import { useBodyScrollLock } from '../useBodyScrollLock';
 
 const waUrl = 'https://wa.me/528123540887?text=Hola%2C%20me%20interesa%20solicitar%20una%20demo%20de%20AquaSense';
 
 const navLinks = [
   { label: 'Inicio', href: '#inicio', Icon: LuHouse },
-  { label: 'Servicios', href: '#servicios', Icon: LuBriefcaseBusiness },
   { label: 'Proceso', href: '#como-funciona', Icon: LuDroplets },
   { label: 'Tecnología', href: '#funcionalidades', Icon: LuCpu },
   { label: 'Clientes', href: '#clientes', Icon: LuUsersRound },
